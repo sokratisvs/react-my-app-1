@@ -12,11 +12,18 @@ class App extends Component {
    }
 
   componentDidMount() {
-    fetch('https://facebook.github.io/react-native/movies.json').then((findresponse)=>{
-      this.setState({ Moviedata: findresponse })
+    fetch('https://facebook.github.io/react-native/movies.json').then(response => {
+	     // Convert to JSON
+	     return response.json();
+     }).then(findresponse => {
+	     // findresponse is an object
+	     console.log(findresponse);
+     this.setState({ Moviedata: findresponse });
+  });
 
-    })
-  }
+
+}
+
 
   render() {
     return (
@@ -27,7 +34,7 @@ class App extends Component {
         </header>
 
          <DoughnutChart />
-         if(!this.state.Movidata) return <p> Loading..</p>
+
          <h2>{this.state.Moviedata.title}</h2>
       </div>
     );
